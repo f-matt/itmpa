@@ -1,22 +1,39 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
+	import { toaster } from "$lib/stores/toast";
+
   let username = $state("");
   let password = $state("");
 
   async function login() {
-    console.log("Username: " + username);
-    console.log("Password: " + password);
-
 		let result = null;
 
 		try {
-    	const response = await fetch("/api");
-			if (!response.ok)
-				throw new Error("Network error");
+    	const response = await fetch("/api/auth/login", {
+				method: "POST",
+				body: JSON.stringify({username, password}),
+				headers: {
+					"Content-Type": "application/json"
+				}
+			});
 
 			result = await response.json();
-			console.log("Result: ", result);
+			if (!response.ok) {
+				toaster.error({
+					title: "Error",
+					description: result["detail"]
+				});
+
+				return;
+			}
+
+			localStorage.setItem("itmpaToken", JSON.stringify(result));
+			goto("/home");
 		} catch (error) {
-			console.error("Fetch error: ", error);
+			toaster.error({
+				title: "Error",
+				description: "Error authenticating user."
+			});
 		}
 	}
 </script>
