@@ -7,20 +7,26 @@
 	</head>
 
 	<body data-sveltekit-preload-data="hover">
+    <div style="display: contents">%sveltekit.body%</div>
+    <!--
 		<div class="grid h-screen grid-rows-[auto_1fr_auto]">
-			<!-- Header -->
-			<header class="bg-gray-400 p-4">IT Manager Personal Assistant</header>
 
-      <!-- Grid Columns -->
+			<header class="bg-gray-400 p-4 grid grid-cols-2">
+        <div>IT Manager Personal Assistant</div>
+        <button type="button" class="btn-icon preset-filled" title="Logout" aria-label="Logout">
+          <LogOutIcon size={18} />
+        </button> 
+      </header>
+
       <div class="grid grid-cols-1 md:grid-cols-[auto_1fr]">
-        <!-- Main Content -->
         <main class="space-y-4 p-4">
           <div style="display: contents">%sveltekit.body%</div>
         </main>
       </div>
 
-      <!-- Footer -->
       <footer class="bg-gray-200 p-4">2026 | fmatt-dev</footer>
     </div>
+  -->
 	</body>
+
 </html>
